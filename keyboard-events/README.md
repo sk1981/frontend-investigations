@@ -1,8 +1,15 @@
+# Table of Contents  
+[Chrome/Opera](#chromeopera)  
+[IE11](#ie-11)  
+[Firefox](#firefox)  
+[Safari](#safari-7-emulation)  
+[Observation](#observation)  
+
 Results of testing kepress v/s keyup & keydown events across diffent browsers
 
 #Chrome/Opera
-##KeyPress
 
+###KeyPress
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |No 	       |          |             |       |        |		    |                                          |			
@@ -17,8 +24,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Tab           |No 	       |          |             |       |        |		    |                                          |			
 |Control       |No 	       |          |             |       |        |		    |                                          |			
 
-##KeyDown
 
+###KeyDown
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |Yes	       |ArrowUp   | Up          | 38    | 0      |38 		|                                           |			
@@ -38,8 +45,7 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
  
  
 #IE 11
-
-##KeyPress
+###KeyPress
 
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
@@ -54,8 +60,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Tab           |No 	       |          |             |       |        |		    |                                          |			
 |Control       |No 	       |          |             |       |        |		    |                                          |			
 
-##KeyDown
 
+###KeyDown
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
 |Up            |Yes	       |Up        | Undefined   | 38    | 0      |38 	  |Different from Chrome's ArrowUp            |			
@@ -75,8 +81,7 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 
 # Firefox
 
-##KeyPress
-
+###KeyPress
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |Yes	       |ArrowUp   | Undefined   | 38    | 0      |0	    |Event fired, Same: Insert, Home etc       |			
@@ -90,8 +95,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Tab           |Yes	       |Tab       | Undefined   | 9     | 0      |0     |Same: backspace, esc                      |			
 |Control       |No 	       |          |             |       |        |		    |Same: special keys like shift,alt         |			
 
-##KeyDown
 
+###KeyDown
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
 |Up            |Yes	       |ArrowUp   | Undefined   | 38    | 0      |38 	  |                                           |			
@@ -112,8 +117,7 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 # Safari 7 (Emulation)
 NOTE : Due to emulation issues and older version, results may not be accurate and/or up to date
 
-##KeyPress
-
+###KeyPress
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |No 	       |          |             |       |        |		    |                                          |			
@@ -126,8 +130,8 @@ NOTE : Due to emulation issues and older version, results may not be accurate an
 |Tab           |No 	       |          |             |       |        |		    |                                          |			
 |Control       |No 	       |          |             |       |        |		    |                                          |			
 
-##KeyDown
 
+###KeyDown
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
 |Up            |Yes	       |Undefined | Up          | 38    | 0      |38  		|                                           |			
