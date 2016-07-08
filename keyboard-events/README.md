@@ -75,6 +75,40 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 
 # Firefox
 
+##KeyPress
+
+|Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
+|--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
+|Up            |Yes	       |ArrowUp   | Undefined   | 38    | 0      |0	    |Event fired, Same: Insert, Home etc       |			
+|a             |Yes	       |a         | Undefined   | 0     | 97     |97	   |                                          |			
+|A             |Yes	       |A         | Undefined   | 0     | 65     |65	   |                                          |			
+|;             |Yes	       |;         | Undefined   | 0     | 59     |59	   |                                          |			
+|Shift+a       |Yes	       |A         | Undefined   | 0     | 65     |65	   |No Shift Event                            |			
+|Shift+A       |Yes	       |a         | Undefined   | 0     | 97     |97	   |                                          |			
+|Ctrl+Shift+a  |Yes	       |a         | Undefined   | 0     | 1      |1 	   |                                          |			
+|Enter         |Yes	       |Enter     | Undefined   | 13    | 13     |13	   |                                          |			
+|Tab           |Yes	       |Tab       | Undefined   | 9     | 0      |0     |Same: backspace, esc                      |			
+|Control       |No 	       |          |             |       |        |		    |Same: special keys like shift,alt         |			
+
+##KeyDown
+
+|Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
+|--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
+|Up            |Yes	       |ArrowUp   | Undefined   | 38    | 0      |38 	  |                                           |			
+|a             |Yes	       |a         | Undefined   | 65    | 0      |65 	  |                                           |			
+|A             |Yes	       |A         | Undefined   | 65    | 0      |65 	  |                                           |			
+|;             |Yes	       |;         | Undefined   | 59    | 0      |59 	  | Same as keypress (unlike chrome).         |			
+|Shift+a       |Yes (2)    |Shift     | Undefined   | 16    | 0      |16 	  |                                           |			
+|              |   	       |A         | Undefined   | 65    | 0      |65 	  |                                           |			
+|Shift+A       |Yes	(2)    |Shift     | Undefined   | 16    | 0      |16 	  |                                           |			
+|              |   	       |a         | Undefined   | 65    | 0      |65 	  |                                           |			
+|Ctrl+Shift+a  |Yes (3)    |Control   | Undefined   | 17    | 0      |17 	  |                                           |			
+|              |  	        |Shift     | Undefined   | 16    | 0      |16 	  |                                           |			
+|              |  	        |A         | Undefined   | 65    | 0      |65 	  |                                           |			
+|Enter         |Yes	       |Enter     | Undefined   | 13    | 0      |13 	  |                                           |			
+|Tab           |Yes 	      |Tab       | Undefined   | 9     | 0      |9  	  |                                           |			
+|Control       |Yes	       |Control   | Undefined   | 17    | 0      |17 	  |                                           |		
+
 # Safari 7 (Emulation)
 
 #Observation
