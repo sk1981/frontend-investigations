@@ -149,5 +149,58 @@ NOTE : Due to emulation issues and older version, results may not be accurate an
  
 
 #Observation
+Browser Usage links:-
+* http://caniuse.com/#feat=keyboardevent-charcode
+* http://caniuse.com/#feat=keyboardevent-code
+* http://caniuse.com/#feat=keyboardevent-key
+* https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which#Browser_compatibility 
+* https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode#Browser_compatibility 
+* https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode#Browser_compatibility 
+
+Lots of differences across all browsers.
+
+#####Key
+*	is not supported in Safari and Mobile browsers
+*	Some variables in key press are different across browser like FF (Scroll, Up) vs Chrome (ScrollLock, ArrowUp)
+
+
+#####KeyPress 
+*	is not supported on many mobile browsers
+*	Is not fired on chrome/ie for non-printable characters, fire on firefox for all and not fired on safari for some characters like Alt, Shift, Control.
+
+
+#####KeyDown/Keyup
+*	Does not differentiate between small caps and large caps variable of an alphabet
+*	Will always show the Capital variant of alphabets
+
+
+#####KeyIdentifer
+*	Is not supported on many browsers
+*	Has issues on safari
+
+
+#####which
+*	Is supposed to be deprecated but seems to have good support
+*	Consistent for keydown across browsers except in FF where the value for some characters like plus(+), semi-color(;) etc are different
+*	Consistent  for printable characters across browsers for keypress, not reliable for non-printable characters (keypress event may not fire at all)
+
+
+#####keyCode
+*	Deprecated
+*	Not supported in FF for keypress, otherwise mostly similiar
+*	Pretty much same for all cases for KeyDown expect some values for cases in FF like plus(+), semi-color(;) etc are different
+*	Dependent on keyboard layout
+
+
+#####charCode
+*	Deprecated/Non-standard (MDN)
+*	Not supported at all for keydown
+*	Similar for keypress for printable characters 
+
+###Usage
+*	For printable characters, best to use keypress events and listen to charCode or which
+*	For listening to non-printable characters like Arrow etc best to use keydown/keyup on keyCode and which fields
+*	For listening to special actions like “Control + P” use keydown/keyup and then match the values of ctrlKey, altKey, metaKey and shiftKey and match the keycode/which values to capital variant of the keys
+*	For checking multiple keys present at the same time like a + b, need to listen to both keydown and keyup events and match the order progmatically
 
 
