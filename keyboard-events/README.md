@@ -202,5 +202,5 @@ Lots of differences across all browsers.
 *	For listening to non-printable characters like Arrow etc best to use keydown/keyup on keyCode and which fields
 *	For listening to special actions like “Control + P” use keydown/keyup and then match the values of ctrlKey, altKey, metaKey and shiftKey and match the keycode/which values to capital variant of the keys
 *	For checking multiple keys present at the same time like a + b, need to listen to both keydown and keyup events and match the order progmatically
-
+* Due to large amount of variations in key events, may make sense to switch to a library for advance usage.
 
