@@ -68,3 +68,27 @@ function test() {
   var a = 5;
 }
 ```
+
+##Const
+**const** works the same way as that is by creating a new variable where required.
+
+```javascript
+const a = 4;
+if(a === 3) {
+  const a = 5;
+}
+```
+Gets converted to
+```javascript
+var a = 4;
+if (a === 3) {
+  var _a = 5;
+}
+```
+One additional check is does is that it throws an error during build time if the variable is reassigned a new value.
+```javascript
+const a = 4;
+a =5;
+```
+This throws error ***"a" is read-only***. This way babel ensures that your constant variables are not reassigned by mistake.
+Note that this check happens during build time only.
