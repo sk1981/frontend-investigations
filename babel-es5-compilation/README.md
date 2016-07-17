@@ -1,6 +1,7 @@
 ##Introduction
 The way Babel JS compilation works is by adding polyfills for some the features (like Map, Set) or convert it to to ES5 during build time. 
 Here I am trying to to see how some of the static compilation features work. 
+Babel version is 6.9.1
 
 ## Let
 
@@ -92,3 +93,38 @@ a =5;
 ```
 This throws error ***"a" is read-only***. This way babel ensures that your constant variables are not reassigned by mistake.
 Note that this check happens during build time only.
+
+## Rest parameters
+The rest operator (...) can be used in front of the last formal parameter and ensures that it will receive all remaining actual parameters in an Array.
+
+If only we are using specfic items from the ***rest array***, babel will just use the arguments object
+```javascript
+function test(main, sub, ...others) {
+  console.log(others[2] + others[0])
+}
+```
+Gets transformed to
+```javascript
+function test(main, sub) {
+  console.log((arguments.length <= 4 ? undefined : arguments[4]) + (arguments.length <= 2 ? undefined : arguments[2]));
+}
+```
+Here babel just checks if parameter being passed is valid or not and returning undefined otherwise.
+
+If we are using the whole array babel will create a new array object.
+```javascript
+function test(main, sub, ...others) {
+  console.log(others)
+}
+```
+Gets transformed to
+```javascript
+function test(main, sub) {
+  for (var _len = arguments.length, others = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    others[_key - 2] = arguments[_key];
+  }
+
+  console.log(others);
+}
+```
+What's happening above is that babel is looping over the arguments object starting from 2 parameter, create a array object of the required length and then assiging the values from arguments object to the ***others*** array.
