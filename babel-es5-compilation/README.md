@@ -1,7 +1,7 @@
 ##Introduction
 The way Babel JS compilation works is by adding polyfills for some the features (like Map, Set) or convert it to to ES5 during build time. 
 Here I am trying to to see how some of the static compilation features work. 
-Babel version is 6.9.1
+Babel version is 6.9.1, and the approach my change in future babel versions.
 
 ## Let
 
@@ -128,3 +128,86 @@ function test(main, sub) {
 }
 ```
 What's happening above is that babel is looping over the arguments object starting from 2 parameter, create a array object of the required length and then assiging the values from arguments object to the ***others*** array.
+
+##Default Parameters
+Default parameters in ES6 are implemented in a straighfoward manner, the variables are extracted from function arguments and assigned default if they are undefined.
+```javascript
+function append(value = -1, array = []) {
+  console.log(value, array)
+}
+```
+Gets converted to:
+```javascript
+function append() {
+  var value = arguments.length <= 0 || arguments[0] === undefined ? -1 : arguments[0];
+  var array = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+  console.log(value, array);
+}
+```
+
+##Object literal enhancemnts
+
+#### Method definition shorthand
+The short method defintions simply converts to the longer format.
+```javascript
+var data = {
+  do() {
+    return "do"
+  },
+   done: function() {
+    return "done"
+  }
+}
+```
+Gets converted to
+```javascript
+var data = {
+  do: function _do() {
+    return "do";
+  },
+
+  done: function done() {
+    return "done";
+  }
+};
+```
+Main thing to note is that babel adds names to the function expression - ***_do*** and ***done*** in the above example.
+
+#### Shorthand notation
+ES6 allows us to use shorthand notations in object literals instead of repeating something like ***var1: var1*** everywhere.
+```javascript
+var myField = "test";
+var a = {
+  some: "some",
+  myField,
+  last: "last"
+}
+```
+Gets converted to
+```javascript
+var myField = "test";
+var a = {
+  some: "some",
+  myField: myField,
+  last: "last"
+};
+```
+
+####Computated Keys
+ES6 enables us to use variables as object keys in object literal format. Earlier, we had to manually assign the properties on the object instance.
+```javascript
+var data = {
+  field: "hello",
+  [variableFile]: "Some Value",
+  lastfield: "bye"
+}
+```
+Gets converted to:
+```javascript
+var _data;
+var data = (_data = {
+  field: "hello"
+}, _data[variableFile] = "Some Value", _data.lastfield = "bye", _data);
+```
+Note that we are creating a new field to initialize ***_data*** to attach the key and then using the [comma operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Comma_Operator) to assing ***_data*** to ***data***.
+Also, even though the ***lastfield*** property hash static key, we are still assiging it dynamically to preserve the order in the keys are present in the object literal.
