@@ -211,3 +211,57 @@ var data = (_data = {
 ```
 Note that we are creating a new field to initialize ***_data*** to attach the key and then using the [comma operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Comma_Operator) to assing ***_data*** to ***data***.
 Also, even though the ***lastfield*** property hash static key, we are still assiging it dynamically to preserve the order in the keys are present in the object literal.
+
+## Template literals
+
+#### String literals
+String Tempaltes literals enhances the create of string objects by enabling us to use variables or create multiple line strings.
+
+```javascript
+var url = "test.com"
+var title ="Test";
+var fullLink = `<a href="${"http://" + url}">${title}</a>`
+```
+Gets converted to
+```javascript
+var url = "test.com";
+var title = "Test";
+var fullLink = "<a href=\"" + ("http://" + url) + "\">" + title + "</a>";
+```
+This is pretty much what we would do, template literals just save us the hassle of concatenating and escaping.
+
+Simililarly for multiline strings:-
+```javascript
+var longString = `
+  Address line 1,
+  Address line 2,
+  City,
+  Country
+`;
+```
+Gets converted to
+```javascript
+var longString = "\n  Address line 1,\n  Address line 2,\n  City,\n  Country\n";
+```
+Note that all extra spaces and new lines are present in the converted string, enabling us to write multline strings in a more readable manner. 
+
+#### Tagged templates
+With tagged templates were are able to modify the output of template literals using a function applied to the template as a tag.
+
+```javascript
+var a = 5;
+var b = 10;
+tag`Hi   \n.Hello ${ a + b } world ${ a * b }`;
+```
+Gets converted to
+```javascript
+var _templateObject = _taggedTemplateLiteralLoose(["Hi   \n.Hello ", " world ", ""], ["Hi   \\n.Hello ", " world ", ""]);
+function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
+var a = 5;
+var b = 10;
+tag(_templateObject, a + b, a * b);
+```
+Here, Babel creates a field ***_templateObject*** which is an array of all the String components of the template broken down. The ***tag*** function is called the  ***_templateObject*** string array and the passed template variables. Now the ***tag*** function can process and return the final string.
+
+
+
