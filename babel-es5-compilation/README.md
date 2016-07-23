@@ -3,6 +3,14 @@ The way Babel JS compilation works is by adding polyfills for some the features 
 Here I am trying to to see how some of the static compilation features work. 
 Babel version is 6.9.1, and the approach my change in future babel versions.
 
+# Table of Contents  
+[Let](#let)  
+[Const](#const)  
+[Rest Parameters](#rest-parameters)  
+[Default Parameters](#default-parameters)  
+[Object Literal Enhancements](#object-literal-enhancements)  
+[Template Literals](#template-literals)
+
 ## Let
 
 'let' allows block scope usage, the way babel works is by creating a a differently named variable if the variable is used again.
@@ -145,7 +153,7 @@ function append() {
 }
 ```
 
-##Object literal enhancemnts
+##Object literal enhancements
 
 #### Method definition shorthand
 The short method defintions simply converts to the longer format.
