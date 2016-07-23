@@ -176,7 +176,7 @@ function test() {
   var allArgs = [].concat(Array.prototype.slice.call(arguments));
 }
 ```
-Pretty similiar to what we used to do in ES6 manually.
+Pretty similiar to what we used to do in ES5 manually.
 
 ##Default Parameters
 Default parameters in ES6 are implemented in a straighfoward manner, the variables are extracted from function arguments and assigned default if they are undefined.
