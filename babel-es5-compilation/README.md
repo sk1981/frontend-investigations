@@ -7,6 +7,7 @@ Babel version is 6.9.1, and the approach my change in future babel versions.
 [Let](#let)  
 [Const](#const)  
 [Rest Parameters](#rest-parameters)  
+[Spread operator](#spread-operator)  
 [Default Parameters](#default-parameters)  
 [Object Literal Enhancements](#object-literal-enhancements)  
 [Template Literals](#template-literals)
@@ -136,6 +137,46 @@ function test(main, sub) {
 }
 ```
 What's happening above is that babel is looping over the arguments object starting from 2 parameter, create a array object of the required length and then assiging the values from arguments object to the ***others*** array.
+
+###Spread operator
+The spread operator turns the elements of an array into the arguments of a function call or into elements of another array.
+It can be used wherever we want to convert array of parameters into individual parameters, like adding elements to an array fro manother array.
+```javascript
+var params = [ 5, 6, 7 ]
+var newArr = [ 1, 2, ...params, 8, 9 ] // [ 1, 2, 5, 6,7, 8, 9 ]
+```
+This gets converted to
+```javascript
+var params = [ "hello", true, 7 ]
+var newArr = [1, 2].concat(params, [5, 6]); // [ 1, 2, "hello", true, 7, 5, 6 ]
+```
+Pretty straightfoward - it just uses concat to add elements to the array.
+
+Spread can also be used where we have an array, using which we want to call functions or constructor accepting individual parameters.
+```javascript
+Math.max(...[-1, 5, 11, 3])
+new Date(...[1912, 11, 24]) 
+```
+Gets converted to
+```javascript
+Math.max.apply(Math, [-1, 5, 11, 3]);
+new (Function.prototype.bind.apply(Date, [null].concat([1912, 11, 24])))();
+```
+The ES5 version just uses ***apply*** along with the array to make the call.
+
+Also, it can be used to convert any arraylike object to array
+```javascript
+function test() {
+  const allArgs = [...arguments]
+}
+```
+gets converted to
+```javascript
+function test() {
+  var allArgs = [].concat(Array.prototype.slice.call(arguments));
+}
+```
+Pretty similiar to what we used to do in ES6 manually.
 
 ##Default Parameters
 Default parameters in ES6 are implemented in a straighfoward manner, the variables are extracted from function arguments and assigned default if they are undefined.
