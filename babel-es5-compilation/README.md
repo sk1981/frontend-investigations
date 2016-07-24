@@ -11,6 +11,7 @@ Babel version is 6.9.1, and the approach my change in future babel versions.
 [Default Parameters](#default-parameters)  
 [Object Literal Enhancements](#object-literal-enhancements)  
 [Template Literals](#template-literals)
+[Destructuring](#destructuring)
 
 ## Let
 
@@ -312,5 +313,73 @@ tag(_templateObject, a + b, a * b);
 ```
 Here, Babel creates a field ***_templateObject*** which is an array of all the String components of the template broken down. The ***tag*** function is called the  ***_templateObject*** string array and the passed template variables. Now the ***tag*** function can process and return the final string.
 
+## Destructuring
+Destructuring is a convenient way to extract values from data stored in (possibly nested) objects and arrays. 
 
+#### Arrays
+Simples form of array destructuring just assigns variable1 through variableN value of corresponding item in the array, including any nested items.
+```javascript
+let [a, , b] = [2,3,4, 5]
+```
+Gets converted to
+```javascript
+var _ref = [2, 3, 4, 5];
+var a = _ref[0];
+var b = _ref[2];
+```
+It just assigns the array to a temp variable (if the array is not assigned to any variable) and then uses that variable to assign the values.
 
+It can also be used for nested structures
+```javascript
+let data = [[2]];
+let [[a]] = data;
+```
+Gets converted to (slightly formatted)
+```javascript
+var _slicedToArray = function () { 
+  function sliceIterator(arr, i) {
+  var _arr = []; var _n = true; var _d = false; var _e = undefined;
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value); if (i && _arr.length === i) break;
+    }
+  } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } }
+    return _arr; 
+  }
+  return function (arr, i) {
+    if (Array.isArray(arr)) { return arr; }
+    else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); }
+    else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+  };
+}();
+
+var data = [[2]];
+var _data$ = _slicedToArray(data[0], 1);
+var a = _data$[0];
+```
+This is a bit more complicated. _slicedToArray is used when there are any iterator needs to be destructured. It creates a temp array, pushes values into that array and uses that for destructuring.
+
+#### Objects
+Object destrucutring works in the same way
+```javascript
+var {a, b} = {a: 3, b: 5}
+```
+Gets converted to
+```javascript
+var _a$b = { a: 3, b: 5 };
+var a = _a$b.a; // a = 3
+var b = _a$b.b; // b = 3
+```
+Babel here is just assigning the fields from the object to be destructured based on the variable names.
+
+We can also provide other the name of property being bound to
+```javascript
+var {a: myA, b} = {a: 3, b: 5}
+```
+Gets converted to
+```javascript
+var _a$b = { a: 3, b: 5 };
+var myA = _a$b.a; // 3
+var b = _a$b.b; // 5
+```
+Pretty straightfoward.
