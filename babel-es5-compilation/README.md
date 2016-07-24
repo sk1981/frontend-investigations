@@ -10,7 +10,7 @@ Babel version is 6.9.1, and the approach my change in future babel versions.
 [Spread operator](#spread-operator)  
 [Default Parameters](#default-parameters)  
 [Object Literal Enhancements](#object-literal-enhancements)  
-[Template Literals](#template-literals)
+[Template Literals](#template-literals)    
 [Destructuring](#destructuring)
 
 ## Let
