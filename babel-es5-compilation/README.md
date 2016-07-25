@@ -80,6 +80,26 @@ function test() {
 }
 ```
 
+Using let in loops also works and fixes the closure/loop issues we noramlly see with var :
+```javascript
+for (let i = 0; i < 10; i++) {
+    setTimeout(function() {console.log(i); }, 100 * i);
+}
+```
+Gets converted to
+```javascript
+var _loop = function _loop(i) {
+    setTimeout(function () {
+        console.log(i);
+    }, 100 * i);
+};
+
+for (var i = 0; i < 10; i++) {
+    _loop(i);
+}
+```
+So, babel takes care of such situation by creating a new function.
+
 ##Const
 **const** works the same way as that is by creating a new variable where required.
 
