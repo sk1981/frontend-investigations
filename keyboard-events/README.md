@@ -7,9 +7,10 @@
 
 Results of testing kepress v/s keyup & keydown events across diffent browsers
 
-#Chrome/Opera
+## Chrome/Opera
 
-###KeyPress
+### KeyPress
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |No 	       |          |             |       |        |		    |                                          |			
@@ -25,7 +26,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Control       |No 	       |          |             |       |        |		    |                                          |			
 
 
-###KeyDown
+### KeyDown
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |Yes	       |ArrowUp   | Up          | 38    | 0      |38 		|                                           |			
@@ -44,8 +46,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Control       |Yes	       |Control   | Control     | 17    | 0      |17 		|                                           |			
  
  
-#IE 11
-###KeyPress
+## IE 11
+### KeyPress
 
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
@@ -61,7 +63,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Control       |No 	       |          |             |       |        |		    |                                          |			
 
 
-###KeyDown
+### KeyDown
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
 |Up            |Yes	       |Up        | Undefined   | 38    | 0      |38 	  |Different from Chrome's ArrowUp            |			
@@ -81,7 +84,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 
 # Firefox
 
-###KeyPress
+### KeyPress
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |Yes	       |ArrowUp   | Undefined   | 38    | 0      |0	    |Event fired, Same: Insert, Home etc       |			
@@ -96,7 +100,8 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Control       |No 	       |          |             |       |        |		    |Same: special keys like shift,alt         |			
 
 
-###KeyDown
+### KeyDown
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
 |Up            |Yes	       |ArrowUp   | Undefined   | 38    | 0      |38 	  |                                           |			
@@ -114,10 +119,11 @@ Results of testing kepress v/s keyup & keydown events across diffent browsers
 |Tab           |Yes 	      |Tab       | Undefined   | 9     | 0      |9  	  |                                           |			
 |Control       |Yes	       |Control   | Undefined   | 17    | 0      |17 	  |                                           |		
 
-# Safari 7 (Emulation)
+## Safari 7 (Emulation)
 NOTE : Due to emulation issues and older version, results may not be accurate and/or up to date
 
-###KeyPress
+### KeyPress
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                  |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------               |
 |Up            |No 	       |          |             |       |        |		    |                                          |			
@@ -131,7 +137,8 @@ NOTE : Due to emulation issues and older version, results may not be accurate an
 |Control       |No 	       |          |             |       |        |		    |                                          |			
 
 
-###KeyDown
+### KeyDown
+
 |Actual Key    |Event Fired|key       |keyIdentifier|keyCode|charCode|which |Comments                                   |
 |--------------|-----------|----------|-------------|-------|--------|------|---------------------------                |
 |Up            |Yes	       |Undefined | Up          | 38    | 0      |38  		|                                           |			
@@ -148,7 +155,7 @@ NOTE : Due to emulation issues and older version, results may not be accurate an
 |Control       |Yes	       |Undefined | Control     | 17    | 0      |17  		|                                           |			
  
 
-#Observation
+## Observation
 Browser Usage links:-
 * http://caniuse.com/#feat=keyboardevent-charcode
 * http://caniuse.com/#feat=keyboardevent-code
@@ -159,45 +166,45 @@ Browser Usage links:-
 
 Lots of differences across all browsers.
 
-#####Key
+##### Key
 *	is not supported in Safari and Mobile browsers
 *	Some variables in key press are different across browser like FF (Scroll, Up) vs Chrome (ScrollLock, ArrowUp)
 
 
-#####KeyPress 
+##### KeyPress 
 *	is not supported on many mobile browsers
 *	Is not fired on chrome/ie for non-printable characters, fire on firefox for all and not fired on safari for some characters like Alt, Shift, Control.
 
 
-#####KeyDown/Keyup
+##### KeyDown/Keyup
 *	Does not differentiate between small caps and large caps variable of an alphabet
 *	Will always show the Capital variant of alphabets
 
 
-#####KeyIdentifer
+##### KeyIdentifer
 *	Is not supported on many browsers
 *	Has issues on safari
 
 
-#####which
+##### which
 *	Is supposed to be deprecated but seems to have good support
 *	Consistent for keydown across browsers except in FF where the value for some characters like plus(+), semi-color(;) etc are different
 *	Consistent  for printable characters across browsers for keypress, not reliable for non-printable characters (keypress event may not fire at all)
 
 
-#####keyCode
+##### keyCode
 *	Deprecated
 *	Not supported in FF for keypress, otherwise mostly similiar
 *	Pretty much same for all cases for KeyDown expect some values for cases in FF like plus(+), semi-color(;) etc are different
 *	Dependent on keyboard layout
 
 
-#####charCode
+##### charCode
 *	Deprecated/Non-standard (MDN)
 *	Not supported at all for keydown
 *	Similar for keypress for printable characters 
 
-###Usage
+### Usage
 *	For printable characters, best to use keypress events and listen to charCode or which
 *	For listening to non-printable characters like Arrow etc best to use keydown/keyup on keyCode and which fields
 *	For listening to special actions like “Control + P” use keydown/keyup and then match the values of ctrlKey, altKey, metaKey and shiftKey and match the keycode/which values to capital variant of the keys
